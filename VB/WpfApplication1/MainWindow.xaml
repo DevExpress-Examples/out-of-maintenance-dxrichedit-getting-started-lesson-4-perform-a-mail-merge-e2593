@@ -1,0 +1,128 @@
+﻿<Window x:Class="WpfApplication1.MainWindow"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+        xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+        Title="Simple Rich Text Editor" Height="350" Width="525">
+<Window.Resources>
+    <ResourceDictionary>
+        <dxre:RichEditUICommand x:Key="commands" />
+    </ResourceDictionary>
+</Window.Resources>
+<Grid>
+<dxb:BarManager Name="barManager1" ToolbarGlyphSize="Small">
+    <dxb:BarManager.Items>
+    <dxb:BarButtonItem 
+        Command="{Binding Path=FileNew, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biFileNew" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=FileOpen, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biFileOpen" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=FileSaveAs, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biFileSaveAs" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=FilePrint, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}"
+        Name="biFilePrint" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=FilePrintPreview, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biFilePrintPreview" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=EditUndo, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biEditUndo" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=EditRedo, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biEditRedo" />
+    <dxb:BarSubItem 
+        Command="{Binding Path=MailMergeInsertFieldPlaceholder, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergeInsertFieldPlaceholder">
+        <dxb:BarSubItem.ItemLinks>
+            <dxre:InsertMergeFieldsBarListItemLink 
+                BarItemName="biMailMergeInsertFieldList"/>
+        </dxb:BarSubItem.ItemLinks>
+    </dxb:BarSubItem>
+    <dxre:InsertMergeFieldsBarListItem 
+        Name="biMailMergeInsertFieldList" 
+        RichEditControl="{Binding ElementName=richEditControl1}"/>
+    <dxb:BarCheckItem 
+        Command="{Binding Path=MailMergeViewMergedData, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergeViewMergedData" />
+    <dxb:BarButtonItem
+        Command="{Binding Path=MailMergeShowAllFieldCodes, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergeShowAllFieldCodes" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=MailMergeShowAllFieldResults, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergeShowAllFieldResults" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=MailMergeFirstDataRecord, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergeFirstDataRecord" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=MailMergePreviousDataRecord, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergePreviousDataRecord" />
+    <dxb:BarButtonItem 
+        Command="{Binding Path=MailMergeNextDataRecord, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergeNextDataRecord" />
+    <dxb:BarButtonItem
+        Command="{Binding Path=MailMergeLastDataRecord, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergeLastDataRecord" />
+    <dxb:BarButtonItem
+        Command="{Binding Path=MailMergeSaveDocumentAs, Mode=OneTime, Source={StaticResource commands}}"
+        CommandParameter="{Binding ElementName=richEditControl1}" 
+        Name="biMailMergeSaveDocumentAs"/>
+    </dxb:BarManager.Items>
+    <DockPanel>
+        <dxr:RibbonControl DockPanel.Dock="Top">
+            <dxr:RibbonDefaultPageCategory>
+                <dxr:RibbonPage Caption="File" Name="pageFile">
+                    <dxr:RibbonPageGroup Caption="Common" Name="grpCommon">
+                        <dxb:BarButtonItemLink BarItemName="biFileNew" />
+                        <dxb:BarButtonItemLink BarItemName="biFileOpen" />
+                        <dxb:BarButtonItemLink BarItemName="biFileSaveAs" />
+                        <dxb:BarButtonItemLink BarItemName="biFilePrint" />
+                        <dxb:BarButtonItemLink BarItemName="biFilePrintPreview" />
+                        <dxb:BarButtonItemLink BarItemName="biEditUndo" />
+                        <dxb:BarButtonItemLink BarItemName="biEditRedo" />
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+                <dxr:RibbonPage Caption="Mailings" Name="pageMailings">
+                    <dxr:RibbonPageGroup Caption="Write &amp; Insert Fields" 
+                                            Name="grpWriteInsertFields">
+                        <dxb:BarSubItemLink BarItemName="biMailMergeInsertFieldPlaceholder" />
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Preview Results" Name="grpPreviewResults">
+                        <dxb:BarCheckItemLink BarItemName="biMailMergeViewMergedData" />
+                        <dxb:BarButtonItemLink BarItemName="biMailMergeShowAllFieldCodes" />
+                        <dxb:BarButtonItemLink BarItemName="biMailMergeShowAllFieldResults" />
+                        <dxb:BarButtonItemLink BarItemName="biMailMergeFirstDataRecord" />
+                        <dxb:BarButtonItemLink BarItemName="biMailMergePreviousDataRecord" />
+                        <dxb:BarButtonItemLink BarItemName="biMailMergeNextDataRecord" />
+                        <dxb:BarButtonItemLink BarItemName="biMailMergeLastDataRecord" />
+                        <dxb:BarButtonItemLink BarItemName="biMailMergeSaveDocumentAs" />
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+        <dxre:RichEditControl Name="richEditControl1" 
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                              BarManager="{Binding ElementName=barManager1, Mode=OneTime}" 
+                              Loaded="richEditControl1_Loaded"/>
+    </DockPanel>
+</dxb:BarManager>
+</Grid>
+</Window>
